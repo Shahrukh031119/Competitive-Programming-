@@ -13,26 +13,19 @@ const int mod=1e9+7;
 
 void solve(){
 	int n,k;cin>>n>>k;
-	int arr[n];
+	multiset<int> ms;
+	vector<int> v(n);
 	for(int i=0; i<n; i++){
-		cin>>arr[i];
+		cin>>v[i];
 	}
-	int sum=0, ans=0, head=-1, tail=0;
-	while(tail<n){
-		while(head+1<n && sum+arr[head+1]<=k){
-			head++;
-			sum+=arr[head];
-		}
-		ans+=head-tail+1;
-		if(head>=tail){
-			sum-=arr[tail];
-			tail++;
-		}else{
-			tail++;
-			head=tail-1;
+	for(int i=0; i<n; i++){
+		ms.insert(v[i]);
+		if(ms.size()==k){
+			cout<<*ms.rbegin()<<" ";
+			ms.erase(ms.find(v[i-k+1]));
 		}
 	}
-	cout<<ans<<endl;
+	cout<<endl;
 }
 
 signed main(){

@@ -1,0 +1,48 @@
+Description
+
+Given an array of N integers, find the number of subarrays with a sum less than equal to K.
+
+
+Input Format
+
+The first line contains T, the number of test cases (1<=T<=10).
+
+The first line of each test case contains two space-separated integers N, K where 1<=N<=10^5, 0<=K<=10^9.
+
+Next line contains N space-separated integers (0<=Ai<=1e4).
+
+
+Output Format
+
+For each test case print the number of subarrays with a sum less than K in a newline.
+
+
+Sample Input 1
+
+5
+3 5
+1 2 3
+3 6
+3 2 1
+5 0
+2 1 0 4 5
+7 6
+1 2 3 0 1 5 2
+10 10
+1 0 1 1 10 2 3 7 5 9
+
+Sample Output 1
+
+5
+6
+1
+18
+18
+ 
+
+
+Note
+
+For the first test case, number of subarray with sum <=5 -> (1),(1,2),(2),(2,3),(3)
+
+For the second test case, all the subarrays have sum <=6.

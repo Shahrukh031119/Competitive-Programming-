@@ -11,6 +11,8 @@ using ld=long double;
 
 const int mod=1e9+7;
 
+// use multiset to store k numbers at get the maximum
+
 void solve(){
 	int n,k;cin>>n>>k;
 	multiset<int> ms;

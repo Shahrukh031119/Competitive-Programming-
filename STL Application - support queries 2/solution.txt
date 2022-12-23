@@ -1,0 +1,110 @@
+Try to use STL in C++. Or some similar Data structures in other languages.
+
+Use Multiset in C++, and similar structures in other languages.
+
+Maintain two multisets, lets call them M1, M2. M1 multiset will store candidates elements for top K positions, i.e., greatest K elements. M2 will store other remaining elements.
+Note that at any point, it may be possible that both M1 and M2 are empty, or both M1 and M2 are non-empty, or M1 is non-empty and M2 is empty.
+
+When add query comes, the following scenarios can possible to happen.
+
+If the size of M1 is less than K, then add that element in M1.
+If the current size of M1 is equal to K, add the element in M1 and remove the smallest element in M1 and add that element in M2.
+When remove query comes, the following scenarios can possible to happen.
+
+If the query element x is present in M2, remove it directly from M2.
+If the query element x is present in M1, remove it from M1. And
+if the size of M1 is equal to K - 1 and M2 is non-empty, the remove greatest element from M2 and add that in M1. If M2 is empty, that means so far we have  - 1 element present in the structure.
+if the size of M1 is less than K - 1, that M2 is empty.
+See the code for more clarity.
+
+#include<bits/stdc++.h>
+using namespace std;
+
+#define ll long long int
+#define LD long double
+
+const int N = 200010;
+
+int inf = 1e9;
+int mod = 1e9 + 7;
+
+
+class MyStructure {
+private:
+    multiset<int> M1, M2;
+    ll sum;
+    int K;
+
+public:
+    MyStructure(int K) : K(K), sum(0LL) {};
+
+    void add(int x) {
+        M1.insert(x);
+        sum += x;
+        if((int)M1.size() > K) {
+            int y = *(M1.begin());
+            M1.erase(M1.find(y));
+            sum -= y;
+            M2.insert(y);
+        }
+        return;
+    }
+
+    void remove(int x) {
+        if(M2.find(x) != M2.end()) {
+            M2.erase(M2.find(x));
+        }
+        else if(M1.find(x) != M1.end()) {
+            sum -= x;
+            M1.erase(M1.find(x));
+            if(M2.empty()) return;
+            int y = *(M2.rbegin());
+            sum += y;
+            M1.insert(y);
+            M2.erase(M2.find(y));
+        }
+        return;
+    }
+
+    ll getSum() {
+        return sum;
+    }
+};
+
+signed main()
+{
+    //freopen("IN", "r", stdin);
+    //freopen("OUT", "w", stdout);
+
+    ios_base::sync_with_stdio(0);
+    cin.tie(0); cout.tie(0);
+
+    int Q, K; cin >> Q >> K;
+
+    MyStructure M(K);
+
+    while(Q--) {
+        int t; cin >> t;
+        if(t == 1) {
+            int x; cin >> x;
+            M.add(x);
+        }
+        else if(t == 2) {
+            int x; cin >> x;
+            M.remove(x);
+        }
+        else if(t == 3) {
+            char c; cin >> c;
+            cout << M.getSum() << "\n";
+        }
+        else {
+            //asserting this condition never happens
+            assert(1 == 0);
+        }
+    }
+
+    return 0;
+}
+
+
+

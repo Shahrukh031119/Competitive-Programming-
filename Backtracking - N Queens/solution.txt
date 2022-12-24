@@ -1,0 +1,60 @@
+#include<bits/stdc++.h>
+using namespace std;
+
+int n;
+int ans;
+
+bool check(int row,int col){ // given the previous queens, can i place at (row,col)
+    for(int prow = 0; prow < row ; prow++){ // loop on previous queens
+        int pcol = queens[prow];
+        if(pcol == col || abs(row-prow)==abs(col-pcol)){// check col and diagonals
+            return 0;
+        }
+    }
+    return 1;
+}
+
+vector<vector<int>> solutions
+
+void rec(int level,vector<int> &queens){ // level = row
+    // Debug
+    // cout<<level<<": [";
+    // for(auto v:queens){
+    //  cout<<v<<",";
+    // }
+    // cout<<"]\n";
+
+    // base case
+    if(level==n){
+        // queens array gives me a solution.
+        solutions.push_back(queens);
+        ans++; // print possible
+        return;
+    }
+    // explore
+    // for all choices
+    for(int col = 0; col<n; col++){
+    // check the choice
+        if(check(level,col)){
+        // if fine, make the move
+            // set
+            queens.push_back(col);
+            // level rec
+            rec(level+1);
+            // unset
+            queens.pop_back();
+        }
+    }
+}
+
+int solve(){
+    cin>>n;
+    ans = 0;
+    vector<int> temp;
+    rec(0,temp);
+    cout<<ans<<endl;
+}
+
+signed main(){
+    solve();
+}

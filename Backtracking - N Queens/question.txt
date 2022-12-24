@@ -1,0 +1,2 @@
+For a given N, print all possible count with coordinates for each solution if it is possible 
+to place N Queens in a NxN chessboard such that no two queens attack each other.

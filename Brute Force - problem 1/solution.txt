@@ -1,0 +1,45 @@
+#include<bits/stdc++.h>
+using namespace std;
+
+void solve(){
+    int n;
+    cin>>n;
+    int ans = 0;
+    // for(int fghij=1234;fghij<=98765/n;fghij++){
+    //  int abcde = fghij*n;
+    //  set<int> st;
+    //  int temp = fghij;
+    //  for(int i=0;i<5;i++){
+    //      st.insert(temp%10);
+    //      temp/=10;
+    //  }
+    //  temp = abcde;
+    //  for(int i=0;i<5;i++){
+    //      st.insert(temp%10);
+    //      temp/=10;
+    //  }
+    //  if(st.size()==10){
+    //      ans++;
+    //  }
+    // }
+
+    vector<int> temp = {0,1,2,3,4,5,6,7,8,9};
+    // for(int i=0;i<100;i++){
+    //  temp.push_back(i);
+    // }
+    do{
+        int abcde = temp[0]*10000+temp[1]*1000+temp[2]*100+temp[3]*10+temp[4];
+        int fghij = temp[0+5]*10000+temp[1+5]*1000+temp[2+5]*100+temp[3+5]*10+temp[4+5];
+        if(abcde===fghij*n){
+            ans++;
+        }
+    }while(next_permutation(temp.begin(),temp.end()));
+
+    cout<<ans<<endl;
+}    
+
+signed main(){
+    ios_base::sync_with_stdio(0);cin.tie(0);cout.tie(0);
+    //int _t;cin>>_t;while(_t--)
+    solve();
+}

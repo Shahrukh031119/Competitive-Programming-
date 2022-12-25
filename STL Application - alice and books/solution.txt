@@ -1,0 +1,93 @@
+You need to store those integers which contain numbers greater than the current B books which have at least B pages and remove the rest. Think about how you can store these integers.
+
+Think of a data structure that can efficiently remove and insert integers.
+
+
+Initially, the number of books read is 0. After each book is read, we need to update the answer. We can use priority queue/multiset to store the number of books. For each book read, you have to do the following:
+
+If the number of pages is greater than the current answer, add it in the priority queue/multiset.
+Remove the books which have pages not greater than the current answer.
+If the size of priority queue/multiset is greater than the current answer, increment the answer by 1.
+Time Complexity per test case: O(N*logN)
+
+A solution with linear time complexity is possible if we store the number of pages in each book in a frequency array. Initially, the number of books read is 0. For each book read, you have to do the following:
+
+Increase the frequency of the number of pages.
+If the number of pages is greater than the current answer, increase the count of books that have a greater number of pages than the current answer.
+If the count of books that have a greater number of pages than the current answer is greater than the current answer, increment the current answer by 1. This is because now we have more than cur books with at least cur number of pages. (here cur denotes the current answer). Reduce the frequency of the current answer from the count of books that have a greater number of pages than the current answer.
+Time Complexity per test case: O(N)
+
+
+Solution 1:
+
+#include <bits/stdc++.h>
+using namespace std;
+
+#define IOS ios::sync_with_stdio(0); cin.tie(0); cout.tie(0);
+
+int main() {
+    IOS
+    int t;
+    cin >> t;
+    while(t--) {
+        int n;
+        cin >> n;
+        multiset<int> s;
+        int b = 1;
+        for (int i = 0; i < n; ++i) {
+            int x;
+            cin >> x;
+            if(x > b) {
+                s.insert(x);
+            }
+            while(!s.empty() && *s.begin() <= b) {
+                s.erase(s.begin());
+            }
+            if(s.size() > b) {
+                b++;
+            }
+            cout << b << " ";
+
+        }
+        cout << "\n";
+    }
+    return 0;
+}
+
+--------------------------------------------------- 
+
+Solution 2:
+
+#include <bits/stdc++.h>
+using namespace std;
+
+#define IOS ios::sync_with_stdio(0); cin.tie(0); cout.tie(0);
+
+int main() {
+    IOS
+    int t;
+    cin >> t;
+    while(t--) {
+        int n;
+        cin >> n;
+        int freq[100001] = {};
+        int b = 0, cnt = 0;
+        for (int i = 0; i < n; ++i) {
+            int x;
+            cin >> x;
+            freq[x]++;
+            if(x > b) {
+                cnt++;
+            }
+            if(cnt > b) {
+                b++;
+                cnt -= freq[b];
+            }
+            cout << b << " ";
+        }
+        cout << "\n";
+    }
+    return 0;
+}
+
+

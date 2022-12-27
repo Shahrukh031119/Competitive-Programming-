@@ -1,0 +1,36 @@
+Description
+
+For the given n, consider the array A = {1, 2, …, n}. There exist n! unique permutations of the array. When we list all these n! permutations in lexicographically order, your task is to find kth permutation in that list.
+
+
+Input Format
+
+The first line contains two space-separated integers n and k.
+
+
+Output Format
+
+Print n space-separated integers, denoting the kth permutation.
+
+
+Constraints
+
+1 ≤ n ≤ 105
+1 ≤ k ≤ min(n!, 109)
+
+
+Sample Input 1
+
+3 4
+
+Sample Output 1
+
+2 3 1
+
+Sample Input 2
+
+10 3
+
+Sample Output 2
+
+1 2 3 4 5 6 7 9 8 10

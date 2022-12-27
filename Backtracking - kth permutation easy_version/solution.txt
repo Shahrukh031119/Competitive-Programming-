@@ -1,0 +1,38 @@
+#include<bits/stdc++.h>
+using namespace std;
+
+#define ll long long int
+#define LD long double
+
+const int N = 100010;
+
+int inf = 1e9;
+int mod = 1e9 + 7;
+
+signed main()
+{
+    //freopen("IN", "r", stdin);
+    //freopen("OUT", "w", stdout);
+
+    ios_base::sync_with_stdio(0);
+    cin.tie(0); cout.tie(0);
+
+    int n, k;
+    cin >> n >> k;
+
+    vector<int> nums(n);
+    for(int i = 0; i < n; i++) {
+        nums[i] = i + 1;
+    }
+
+    for(int i = 0; i < k - 1; i++) {
+        next_permutation(nums.begin(), nums.end());
+    }
+
+    for(int u : nums) {
+        cout << u << " ";
+    }
+    cout << "\n";
+
+    return 0;
+}

@@ -1,0 +1,82 @@
+You can generate all subsets with the time complexity of 2N. But it's not enough to pass the limits.
+
+Divide the array into two parts, one is of size N / 2 and the other is of size N - N / 2.
+
+Brute force won't pass the limits. So we have to apply to optimize brute force techniques.
+
+Divide the array into two parts of size N / 2 each. Generate all subset sums for each part with complexity O(2N/2). Observe that generating 2N/2 subsets are within the limits (235/2 ~ 105).
+
+Sort all subset sums for each part. Now iterate over the first half, for each subset-sum Si in the first half we have to find the number of subsets in the second half with sum ≤ X - Si. You can find it using different techniques like binary search, or two pointers.
+
+This trick is called meet-in-the-middle. This trick will be discussed in more detail in the session.
+
+Time Complexity: O(N 2N/2)
+Space Complexity: O(2N/2)
+
+
+#include<bits/stdc++.h>
+using namespace std;
+
+#define ll long long int
+
+signed main() 
+{
+    ios::sync_with_stdio(0); 
+    cin.tie(0); cout.tie(0);   
+
+    int T; cin >> T;
+    while(T--) {
+        int n, x; 
+        cin >> n >> x;
+
+        vector<int> aL, aR;
+        for(int i = 0; i < n / 2; i++) {
+            int x; cin >> x;
+            aL.push_back(x);
+        }
+        for(int i = n / 2; i < n; i++) {
+            int x; cin >> x;
+            aR.push_back(x);
+        }
+
+        vector<int> left, right;
+
+        int m = (int)aL.size();
+        for(int i = 0; i < (1 << m); i++) {
+            int sum = 0;
+            for(int j = 0; j < m; j++) {
+                if((i >> j) & 1) {
+                    sum += aL[j];
+                }
+            }
+            left.push_back(sum);
+        }
+
+        m = (int)aR.size();
+        for(int i = 0; i < (1 << m); i++) {
+            int sum = 0;
+            for(int j = 0; j < m; j++) {
+                if((i >> j) & 1) {
+                    sum += aR[j];
+                }
+            }
+            right.push_back(sum);
+        }
+
+        sort(left.begin(), left.end());
+        sort(right.begin(), right.end());
+
+        ll ans = 0;
+
+        int ptr = (int)right.size() - 1;
+        for(int u : left) {
+            if(u > x) break;
+            while(ptr >= 0 && right[ptr] + u > x) {
+                ptr--;
+            }
+            ans += ptr + 1;
+        }
+
+        cout << ans << "\n";
+    }
+}

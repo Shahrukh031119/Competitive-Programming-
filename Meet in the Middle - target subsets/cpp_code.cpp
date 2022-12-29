@@ -52,6 +52,8 @@ void solve(){
 	vector<int> arr1, arr2;
 	arr1=generate(newarr[0]);
 	arr2=generate(newarr[1]);
+	sort(arr1.begin(),arr1.end());
+	sort(arr2.begin(),arr2.end());
 
 	int ans=0;
 	for(int i=0; i<arr1.size(); i++){

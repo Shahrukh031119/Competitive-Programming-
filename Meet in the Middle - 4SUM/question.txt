@@ -1,0 +1,9 @@
+Given n and target, find if there exists a,b,c,d such that
+arr[a]+arr[b]+arr[c]+arr[d]=target with constraints as
+
+n belongs [1,1000] & a,b,c,d belongs [0,n) & arr[n]<=10^9
+
+- variant1 : indices a,b,c,d can be same i.e 0<= a,b,c,d <=n-1
+- variant2 : 0<= a<b<c<d <=n-1
+- variant3 : find such a quadruple
+- variant4 : count all such quadruples  

@@ -1,0 +1,1 @@
+meet in the middle is used to optimise the variant1 approach

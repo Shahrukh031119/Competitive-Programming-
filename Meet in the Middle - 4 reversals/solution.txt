@@ -1,0 +1,124 @@
+For a string of length N, you have to consider all strings obtained by reversal of any substring of that string. Of all such strings generated, check if any one of them is the target string. This is the Brute Force approach to the problem. 
+
+For a string of length N, how many substrings are possible? N^2 different strings are possible by their substring reversal. In total there has to be 4 transitions taking place. In the first step, N^2 different strings are formed, then for each of these strings, another set of N^2 different strings is obtained. This process is repeated four times in total, till you get one string the same as the original string. 
+
+S → S1 → S2 → S3 → T
+
+At each of the four recursion stacks, there are N^2 choices of strings. Each of these steps takes O(N^2 ) time. So total Time Complexity becomes O(N*(N^2)^k ) . where k is the total number of steps (i.e. k=4 ). Additional O(N) is because of the reversal of the string, in the recursion stack.
+
+Hence, by using Brute Force total time complexity becomes O(N^9). This is too big even with the given constraints. Can you do better than this?
+
+Here, the above brute force logic can be optimized to a great extent using the Meet in the Middle concept. One crucial observation to the problem is that, from S by reversing some substring we can obtain S1, similarly, by reversing some substring of S1 we can obtain S again. 
+
+Hence, S ↔ S1. 
+
+Generally in the meet in the middle concept, we try to divide the element in half. So here we are dividing the recursion level (or the number of moves left ) in half. So from each string, we are going to apply 2 moves, to reach a certain S2 string.       S → S1 → S2
+
+Again starting from the target string T, we are applying two moves to reach S2 .  S2 ← S3 ← T 
+
+Generate all possible values of S2 from both S and T strings,  and check if there are any two components similar. 
+
+
+This reduces the Time Complexity to a great extent. How?
+
+To generate all distinct S2 from S will take O((N^2)^k) with k=2 i.e. O(N^4) time. Similarly to generate all S2 from the T string will take O(N^4) time.  They are stored in set gen1 and gen2 respectively. Also, the reversal of string in all recursion stacks will be O(N) in total.  Finally, the sets will contain O(N^4) elements. And checking the set for the presence of the same S2 string will take up O(N^4 logN). Hence, the final time complexity becomes O(N^5 logN) . Thus Meet in the Middle greatly reduces the time complexity of the code.
+
+ 
+
+EXAMPLE RUN : 
+
+1
+
+abdec
+
+bdaec
+
+From S = abdec , there are two reversals to obtain : S2 = aecbd 
+
+[ abdec → abced and abced → aecbd ]
+
+From T = bdaec , there are two reversals to obtain : S2 = aecbd 
+
+[ bdaec → bcead and bcead → aecbd ]
+
+
+#include<bits/stdc++.h>
+
+using namespace std;
+#define IOS ios::sync_with_stdio(0); cin.tie(0); cout.tie(0);
+using lli =  int long long;
+lli n,n2;
+lli tot = 1e9+10;
+set<string> gen;
+
+string reverse1(string s , int l ,int r){
+    reverse(s.begin()+l,s.begin()+r+1);
+    return s;
+}
+
+
+// generates all posible strings from substring reversal with k moves left
+void brute(string st , int k){
+
+    if(k==0){ 
+        gen.insert(st);
+        return;
+    }
+    int l=0;int r = st.length()-1;
+
+   for(int i=0;i<=r;i++){
+        for(int j=i;j<=r;j++){
+            string s2 = st;
+            s2 = reverse1(st,i,j);
+            brute(s2,k-1);
+        }   
+    }
+
+}
+
+
+int main()
+{
+    #ifndef ONLINE_JUDGE
+    // for getting input from input.txt
+    freopen("input.txt", "r", stdin);
+    // for writing output to output.txt
+    freopen("output.txt", "w", stdout);
+    #endif
+
+    IOS
+    lli t;
+
+    cin>>t;
+    while(t--){
+        string s,t;
+        cin >> s >> t;
+        set<string> gen1;
+        set<string> gen2;
+
+        brute(s,2);
+        gen1=gen;      //Stores all possible values of S2 after 2 step substring reversal from S
+        gen.clear();
+
+        brute(t,2);
+        gen2=gen;       //Stores all possible values of S2 after 2 step substring reversal from T
+        gen.clear();
+
+        //Check if any S2 value from the 2 sets are same.
+        int c=0;
+        for(auto it:gen1){
+            if(gen2.find(it)!=gen2.end()){
+                cout << "YES" <<"\n";
+                c=1;
+                break;
+            }
+
+        }
+        if(!c)
+            cout << "NO" << "\n";
+    }
+    return 0;
+}
+
+//TIME COMPLEXITY
+// O(N^5 logN)

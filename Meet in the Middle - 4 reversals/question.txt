@@ -1,0 +1,66 @@
+Description
+
+We are given two equal-length strings S and T. Figure out if we can get string T starting from string S and applying 4 substring reversal operations.
+
+
+Input Format
+
+The first line contains an integer TC (number of test cases),
+
+The next line contains a string S. 
+
+The next line contains a string T. 
+
+
+Output Format
+
+For each test case print “YES” if it is possible to form a square fence, else print “NO” without double quotes in a new line.
+
+
+Constraints
+
+1 ≤ TC ≤ 10^2
+1 ≤ |S| ≤ 40
+|T|=|S|
+
+Sample Input 1
+
+2
+abacde
+beacda
+abcdef
+abdefc
+
+Sample Output 1
+
+YES
+YES
+
+Note
+
+TEST CASE 1:
+
+S = prqs
+
+T = psrq
+
+4 transitions are : 
+
+prqs → pqrs
+pqrs → srqp
+srqp → srpq
+srpq → psrq
+ 
+
+TEST CASE 2:
+
+S = abdec
+
+T = bdaec
+
+4 transitions are : 
+
+abdec → abced
+abced → aecbd
+aecbd → bcead
+bcead → bdaec

@@ -1,0 +1,49 @@
+Description
+
+You have given an array of length N, and a number X. Find the number of subsets with the sum of elements less than equal to X.
+
+Note:
+
+The sum of elements in an empty subset is 0.
+The set may contain duplicates elements.
+
+Input Format
+
+The first line of input contains T - the number of test cases.
+The first line of each test case contains two space-separated numbers N and X.
+The second line of each test case contains N space-separated integers A1, A2, ..., AN.  
+
+
+Output Format
+
+Print the number of subsets with a sum less than equal to X in a new line for each test case.
+
+
+Constraints
+
+1 ≤ T ≤ 5
+1 ≤ N ≤ 35
+0 ≤ Ai ≤ 104
+0 ≤ X ≤ 106
+
+
+Sample Input 1
+
+2
+2 1
+1 2
+3 8
+2 2 6
+
+Sample Output 1
+
+2
+7
+
+Note
+
+Explanation 1:
+The subsets are {}, {1}, {2}, {1, 2}. The number of subsets with sum ≤ 1 is 2.
+
+Explanation 2:
+The subsets are {}, {2}, {2}, {6}, {2, 2}, {2, 6}, {2, 6}, {2, 2, 6} The number of subsets with sum ≤ 8 is 7.

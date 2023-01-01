@@ -1,49 +1,37 @@
 Description
 
-You have given an array of length N, and a number X. Find the number of subsets with the sum of elements less than equal to X.
+You are given a multiset of N integers. Check whether there exists a nonempty subset of it such that the sum of the subset's elements is divisible by N. Otherwise, state that this subset doesn't exist.
 
-Note:
-
-The sum of elements in an empty subset is 0.
-The set may contain duplicates elements.
 
 Input Format
 
-The first line of input contains T - the number of test cases.
-The first line of each test case contains two space-separated numbers N and X.
-The second line of each test case contains N space-separated integers A1, A2, ..., AN.  
+The first line of the input contains an integer T denoting the number of test cases. The description of T test cases follows.
+The first line of each test consists of a single integer N - the size of the multiset.
+The second line of each test contains N single space-separated integers - the multiset's elements.
 
 
 Output Format
 
-Print the number of subsets with a sum less than equal to X in a new line for each test case.
+For each test case, print 'YES' if such a subset exists, otherwise print 'NO'.
 
 
 Constraints
 
-1 ≤ T ≤ 5
-1 ≤ N ≤ 35
-0 ≤ Ai ≤ 104
-0 ≤ X ≤ 106
+1 ≤ T ≤ 10
+1 ≤ N ≤ 105
+1 ≤ Ai ≤ 109
 
 
 Sample Input 1
 
-2
-2 1
-1 2
-3 8
-2 2 6
+1
+3
+4 6 10
 
 Sample Output 1
 
-2
-7
+YES
 
 Note
 
-Explanation 1:
-The subsets are {}, {1}, {2}, {1, 2}. The number of subsets with sum ≤ 1 is 2.
-
-Explanation 2:
-The subsets are {}, {2}, {2}, {6}, {2, 2}, {2, 6}, {2, 6}, {2, 2, 6} The number of subsets with sum ≤ 8 is 7.
+We can pick {6} as the subset, then its sum is 6 and this is divisible by 3 - the size of the initial multiset.

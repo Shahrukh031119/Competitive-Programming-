@@ -7,6 +7,9 @@ using namespace std;
 using ld=long double;
 const int mod=1e9+7; 
 
+// using pigeon hole principle 
+// solved in O(N) time
+
 void solve(){
     int n;cin>>n;
     vector<int> arr(n);

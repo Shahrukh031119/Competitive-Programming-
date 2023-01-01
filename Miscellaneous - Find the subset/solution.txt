@@ -1,82 +1,35 @@
-You can generate all subsets with the time complexity of 2N. But it's not enough to pass the limits.
+Subarrays are also the subset. Try to think in the direction of subarrays.
 
-Divide the array into two parts, one is of size N / 2 and the other is of size N - N / 2.
+Apply Pigeon Hole Principle.
 
-Brute force won't pass the limits. So we have to apply to optimize brute force techniques.
-
-Divide the array into two parts of size N / 2 each. Generate all subset sums for each part with complexity O(2N/2). Observe that generating 2N/2 subsets are within the limits (235/2 ~ 105).
-
-Sort all subset sums for each part. Now iterate over the first half, for each subset-sum Si in the first half we have to find the number of subsets in the second half with sum ≤ X - Si. You can find it using different techniques like binary search, or two pointers.
-
-This trick is called meet-in-the-middle. This trick will be discussed in more detail in the session.
-
-Time Complexity: O(N 2N/2)
-Space Complexity: O(2N/2)
+The answer is always YES irrespective of the array.
+Consider the pref[i] = (A1 + A2 + ... + Ai) mod N. Base conditions pref[0] = 0.
+Observe that there are N + 1 values in the pref array (pref[0], pref[1], ...., pref[N]), but the remainder can take in total N values only (0, 1, ..., N - 1). That means, there exists at least one pair in the pref array which has the same entries.  
+Suppose pref[j] == pref[k], and k > j. Then we can conclude that (Aj+1 + ... + Ak) is divisible by N.
+Hence, the answer is always YES.
 
 
-#include<bits/stdc++.h>
+#include <bits/stdc++.h>
 using namespace std;
 
 #define ll long long int
 
-signed main() 
+
+signed main()
 {
-    ios::sync_with_stdio(0); 
-    cin.tie(0); cout.tie(0);   
+    ios_base::sync_with_stdio(false);
+    cin.tie(NULL);
 
     int T; cin >> T;
     while(T--) {
-        int n, x; 
-        cin >> n >> x;
-
-        vector<int> aL, aR;
-        for(int i = 0; i < n / 2; i++) {
-            int x; cin >> x;
-            aL.push_back(x);
-        }
-        for(int i = n / 2; i < n; i++) {
-            int x; cin >> x;
-            aR.push_back(x);
+        int n; cin >> n;
+        int a[n];
+        for(int i = 0; i < n; i++) {
+            cin >> a[i];
         }
 
-        vector<int> left, right;
-
-        int m = (int)aL.size();
-        for(int i = 0; i < (1 << m); i++) {
-            int sum = 0;
-            for(int j = 0; j < m; j++) {
-                if((i >> j) & 1) {
-                    sum += aL[j];
-                }
-            }
-            left.push_back(sum);
-        }
-
-        m = (int)aR.size();
-        for(int i = 0; i < (1 << m); i++) {
-            int sum = 0;
-            for(int j = 0; j < m; j++) {
-                if((i >> j) & 1) {
-                    sum += aR[j];
-                }
-            }
-            right.push_back(sum);
-        }
-
-        sort(left.begin(), left.end());
-        sort(right.begin(), right.end());
-
-        ll ans = 0;
-
-        int ptr = (int)right.size() - 1;
-        for(int u : left) {
-            if(u > x) break;
-            while(ptr >= 0 && right[ptr] + u > x) {
-                ptr--;
-            }
-            ans += ptr + 1;
-        }
-
-        cout << ans << "\n";
+        cout << "YES\n";
     }
+
+    return 0;
 }

@@ -1,0 +1,39 @@
+Description
+
+You have given an array of n numbers and a positive integer m. Lets define c(i, j) = |ai - aj|.
+Your task is to find the product of c(i, j) for all 1 ≤ i < j ≤ n. Since this product can be very large, print it with modulo m.
+
+
+Input Format
+
+The first line contains two integers n, m (2 ≤ n ≤ 2 x 105, 1 ≤ m ≤ 1000) — number of numbers and modulo.
+The second line contains n integers a1, a2, …, an (0 ≤ ai ≤ 109).
+
+
+Output Format
+
+Output a single integer.
+
+
+Sample Input 1
+
+2 10
+8 5
+
+Sample Output 1
+
+3
+
+Sample Input 2
+
+3 12
+1 4 5
+
+Sample Output 2
+
+0
+
+Note
+
+In the first sample, |8 − 5| = 3 ≡ 3 mod 10.
+In the second sample, |1 − 4| ⋅ |1 − 5| ⋅ |4 − 5| = 3 ⋅ 4 ⋅ 1 = 12 ≡ 0 mod12.
